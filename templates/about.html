@@ -6,7 +6,14 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>About Me</h1>
+  <h1>Notas:</h1>
   <hr>
+  {%for k, v in notas.items()%}
+    <!-- {{k}} - {{v}} -->
+    <details>
+      <summary>{{k}}</summary>
+      <span>{{v}}</span>
+    </details>
+  {%endfor%}
 </body>
 </html>
