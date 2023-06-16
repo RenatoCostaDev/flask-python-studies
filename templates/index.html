@@ -8,5 +8,13 @@
 <body>
   <h2>Integração do html com Flask</h2>
   <hr>
+  <h3>Nome: {{name.capitalize()}}</h3>
+  <h3>Idade: {{age}}</h3>
+  <h3>Frutas preferidas :</h3>
+    <ul>
+      {% for fruta in frutas %}
+          <li>{{ fruta }}</li>
+      {% endfor %}
+    </ul>
 </body>
 </html>
