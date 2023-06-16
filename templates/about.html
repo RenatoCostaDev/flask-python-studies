@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>notas-alunos</title>
 </head>
 <body>
   <h1>Notas:</h1>
   <hr>
-  {%for k, v in notas.items()%}
-    <!-- {{k}} - {{v}} -->
+  {%for registro in registros%}
     <details>
-      <summary>{{k}}</summary>
-      <span>{{v}}</span>
+      <summary>{{registro['aluno']}}</summary>
+      <span>{{registro.nota}}</span>
     </details>
   {%endfor%}
+  <hr>
+  <form
+    action="{{url_for('about')}}"
+    method="POST"
+    style="margin-top: 25px;margin-left: 25px;"
+  >
+    <input type="text" name="aluno" placeholder="Nome do aluno" required>
+    <input type="text" name="nota" placeholder="Nota do aluno" required>
+    <button>Adicionar</button>
+  </form>
 </body>
 </html>

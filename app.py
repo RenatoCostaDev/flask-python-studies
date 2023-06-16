@@ -1,26 +1,36 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
-frutas = ['Morango', 'Uva', 'Maçã', 'Laranja']
-notas = {'João': 5.0, 'Ana': 6.0, 'Luciana': 10}
+# frutas = ['Morango', 'Uva', 'Maçã', 'Laranja']
+frutas = []
+# notas = {'João': 5.0, 'Ana': 6.0, 'Luciana': 10}
+registros = []
+
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def principal():
-    name = 'renato'
-    age = 47
-    return render_template(
-        'index.html',
-        name=name,
-        age=age,
-        frutas=frutas,
-    )
+  if request.method == 'POST':
+     if request.form.get('fruta'):
+        frutas.append(request.form.get('fruta'))
 
-@app.route('/about')
+  return render_template(
+  'index.html',
+  frutas=frutas,
+)
+
+@app.route('/about', methods=['GET', 'POST'])
 def about():
-    return render_template(
-        'about.html',
-        notas=notas
-    )
+  if request.method == 'POST':
+     if request.form.get('aluno') and request.form.get('nota'):
+        registros.append({
+           'aluno': request.form.get('aluno'),
+           'nota': request.form.get('nota')
+        })
+
+  return render_template(
+      'about.html',
+      registros=registros
+  )
 
 app.run(debug=True)
 

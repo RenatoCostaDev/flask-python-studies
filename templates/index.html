@@ -3,18 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>lista-frutas</title>
 </head>
 <body>
-  <h2>Integração do html com Flask</h2>
+  <h2 style="text-align: center;">Lista de Frutas : </h2>
   <hr>
-  <h3>Nome: {{name.capitalize()}}</h3>
-  <h3>Idade: {{age}}</h3>
-  <h3>Frutas preferidas :</h3>
     <ul>
       {%for fruta in frutas %}
           <li>{{fruta}}</li>
       {% endfor %}
     </ul>
+  <hr>
+  <form
+    action="{{url_for('principal')}}"
+    method="POST"
+    style="margin-top: 25px;margin-left: 25px;"
+  >
+    <input type="text" name="fruta" placeholder="Adicione uma fruta...">
+    <button>Adicionar</button>
+  </form>
 </body>
 </html>
