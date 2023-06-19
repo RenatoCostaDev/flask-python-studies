@@ -3,10 +3,20 @@
   <h1>Notas:</h1>
   <hr>
   {%for registro in registros%}
-    <details>
+    <!-- <details>
       <summary>{{registro['aluno']}}</summary>
       <span>{{registro.nota}}</span>
-    </details>
+    </details> -->
+    <p>
+      <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample_{{registro.aluno}}" role="button" aria-expanded="false" aria-controls="collapseExample_{{registro.aluno}}">
+        {{registro['aluno']}}
+      </a>
+    </p>
+    <div class="collapse m-2" id="collapseExample_{{registro.aluno}}">
+      <div class="card card-body">
+        {{registro.nota}}
+      </div>
+    </div>
   {%endfor%}
   <hr>
   <form
@@ -14,9 +24,15 @@
     method="POST"
     style="margin-top: 25px;margin-left: 25px;"
   >
-    <input type="text" name="aluno" placeholder="Nome do aluno" required>
-    <input type="text" name="nota" placeholder="Nota do aluno" required>
-    <button>Adicionar</button>
+    <div class="form-group col-10">
+      <label for="aluno" class="form-label">Aluno</label>
+      <input class="form-control" type="text" name="aluno" placeholder="Nome do aluno" required>
+    </div>
+    <div class="form-group col-10">
+      <label for="nota" class="form-label">Nota</label>
+      <input  class="form-control" type="text" name="nota" placeholder="Nota do aluno" required>
+    </div>
+    <button class="btn btn-success mt-2 btn-sm">Adicionar</button>
   </form>
 {% endblock conteudo%}
 

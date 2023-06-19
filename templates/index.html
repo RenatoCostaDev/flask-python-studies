@@ -1,10 +1,10 @@
 {% extends 'base.html'%}
 {% block conteudo%}
-  <h2 style="text-align: center;">Lista de Frutas : </h2>
+  <h2 style="text-align: center;">Lista de Frutas</h2>
   <hr>
-    <ul>
+    <ul class="list-group">
       {%for fruta in frutas %}
-          <li>{{fruta}}</li>
+          <li class="list-group-item m-2">{{fruta}}</li>
       {% endfor %}
     </ul>
   <hr>
@@ -13,7 +13,16 @@
     method="POST"
     style="margin-top: 25px;margin-left: 25px;"
   >
-    <input type="text" name="fruta" placeholder="Adicione uma fruta...">
-    <button>Adicionar</button>
+  <div class="form-group col-10">
+    <label for="exemploFruta" class="form-label">Fruta</label>
+    <input
+      class="form-control"
+      id="exemploFruta"
+      type="text"
+      name="fruta"
+      placeholder="Adicione uma fruta..."
+    >
+  </div>
+    <button class="btn btn-success mt-2 btn-sm">Adicionar</button>
   </form>
 {% endblock conteudo%}
