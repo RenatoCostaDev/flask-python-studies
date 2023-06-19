@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>lista-frutas</title>
-</head>
-<body>
+{% extends 'base.html'%}
+{% block conteudo%}
   <h2 style="text-align: center;">Lista de Frutas : </h2>
   <hr>
     <ul>
@@ -22,5 +16,4 @@
     <input type="text" name="fruta" placeholder="Adicione uma fruta...">
     <button>Adicionar</button>
   </form>
-</body>
-</html>
+{% endblock conteudo%}
