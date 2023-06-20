@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import urllib.request, json
 
 # frutas = ['Morango', 'Uva', 'Maçã', 'Laranja']
 frutas = []
@@ -30,6 +31,19 @@ def about():
   return render_template(
       'about.html',
       registros=registros
+  )
+
+@app.route('/covid')
+def covid():
+  url = 'https://covid19-brazil-api.vercel.app/api/report/v1'
+  resposta = urllib.request.urlopen(url)
+  dados = resposta.read()
+  json_data = json.loads(dados)
+  dados_covid = json_data['data']
+
+  return render_template(
+     'covid.html',
+     dados_covid=dados_covid
   )
 
 app.run(debug=True)
