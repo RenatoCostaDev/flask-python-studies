@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block conteudo%}
+<h2 style="text-align: center;margin-top: 15px;margin-top: 15px;">Lista de Casos de covid por estado</h2>
+<table  class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Estado</th>
+      <th scope="col">Suspeita</th>
+      <th scope="col">Mortes</th>
+      <th scope="col">Última atualização</th>
+    </tr>
+  </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{dados_covid.uf}}</th>
+        <td>{{dados_covid.suspects}}</td>
+        <td>{{dados_covid.deaths}}</td>
+        <td>{{dados_covid.datetime}}</td>
+      </tr>
+    </tbody>
+</table>
+{% endblock conteudo%}

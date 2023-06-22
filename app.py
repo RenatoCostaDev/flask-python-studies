@@ -46,5 +46,18 @@ def covid():
      dados_covid=dados_covid
   )
 
+@app.route('/covid-estado/<estado>')
+def covid_estado(estado):
+
+  url = f'https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/{estado}'
+  resposta = urllib.request.urlopen(url)
+  dados = resposta.read()
+  dados_covid = json.loads(dados)
+
+  return render_template(
+     'covid_estado.html',
+     dados_covid=dados_covid
+  )
+
 app.run(debug=True)
 
