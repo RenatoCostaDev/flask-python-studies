@@ -1,12 +1,30 @@
 from flask import Flask, render_template, request
 import urllib.request, json
+from flask_sqlalchemy import SQLAlchemy
 
-# frutas = ['Morango', 'Uva', 'Maçã', 'Laranja']
-frutas = []
-# notas = {'João': 5.0, 'Ana': 6.0, 'Luciana': 10}
-registros = []
+
+db = SQLAlchemy()
 
 app = Flask(__name__)
+frutas = []
+registros = []
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///cursos.sqlite3"
+db.init_app(app)
+
+class cursos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50))
+    descricao = db.Column(db.String(50))
+    ch = db.Column(db.Integer)
+    def __init__(self, nome, descricao, ch):
+       self.nome = nome
+       self.descricao = descricao
+       self.ch = ch
+
+with app.app_context():
+    db.create_all()
+
 
 @app.route('/', methods=['GET', 'POST'])
 def principal():
