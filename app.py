@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, flash, render_template, request, redirect, url_for
 import urllib.request, json
 from flask_sqlalchemy import SQLAlchemy
 
@@ -17,14 +17,78 @@ class cursos(db.Model):
     username = db.Column(db.String(50))
     descricao = db.Column(db.String(50))
     ch = db.Column(db.Integer)
-    def __init__(self, nome, descricao, ch):
-       self.nome = nome
+    def __init__(self, username, descricao, ch):
+       self.username = username
        self.descricao = descricao
        self.ch = ch
 
 with app.app_context():
     db.create_all()
 
+# routes - section 5
+
+@app.route('/cursos')
+def lista_cursos():
+  # page = request.args.get('page', 1, type=int)
+  # per_page = 4
+  # todos_cursos = cursos.query.paginate(page=1, per_page=4)
+  return render_template(
+     'cursos.html',
+     cursos=cursos.query.all()
+   )
+
+
+@app.route('/novo_curso', methods=['GET', 'POST'])
+def cria_curso():
+  username = request.form.get('nome')
+  descricao = request.form.get('descricao')
+  ch = request.form.get('ch')
+
+  if request.method == 'POST':
+     if not username or not descricao or not ch:
+        flash(' Preencha todos os campos do formulário !!', 'error')
+     else:
+        curso = cursos(username, descricao, ch)
+        db.session.add(curso)
+        flash(' Curso criado com sucesso !!', 'error')
+        db.session.commit()
+        return redirect(url_for('lista_cursos'))
+
+  return render_template(
+     'novo_curso.html'
+   )
+
+@app.route('/<int:id>/atualiza_curso', methods=['GET', 'POST'] )
+def atualiza_curso(id):
+   curso = cursos.query.filter_by(id=id).first()
+   if request.method == 'POST':
+      username = request.form['nome']
+      descricao = request.form['descricao']
+      ch = request.form['ch']
+      cursos.query.filter_by(id=id).update({
+         'username': username,
+         'descricao': descricao,
+         'ch': ch
+       })
+      flash(' Curso atualizado com sucesso !!', 'error')
+      db.session.commit()
+      return redirect(url_for('lista_cursos'))
+
+   return render_template(
+      'atualiza_curso.html',
+      curso=curso
+   )
+
+@app.route('/<int:id>/remove_curso')
+def remove_curso(id):
+   curso = cursos.query.filter_by(id=id).first()
+   db.session.delete(curso)
+   flash(' Curso deletado com sucesso !!', 'error')
+   db.session.commit()
+   return redirect(url_for('lista_cursos'))
+
+
+# routes - section 4
 
 @app.route('/', methods=['GET', 'POST'])
 def principal():
@@ -76,6 +140,11 @@ def covid_estado(estado):
      'covid_estado.html',
      dados_covid=dados_covid
   )
+
+
+if __name__=='__main__':
+    app.secret_key = 'unique key'
+    app.config['SESSION_TYPE'] = 'filesystem'
 
 app.run(debug=True)
 

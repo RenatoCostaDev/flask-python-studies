@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% block conteudo%}
+  <h2 style="text-align: center;">Lista de cursos</h2>
+  <hr>
+  {% for mensagem in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Atenção !</strong>{{ mensagem }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times</span>
+      </button>
+    </div>
+  {% endfor %}
+  <a href="{{url_for('cria_curso')}}" class="btn btn-secondary" style="margin-bottom: 1.5rem;">Adicionar Curso</a>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">CH</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for curso in cursos %}
+      <tr>
+        <th scope="row">{{curso.id}}</th>
+        <td>{{curso.username}}</td>
+        <td>{{curso.descricao}}</td>
+        <td>{{curso.ch}}</td>
+        <td>
+          <a href="{{curso.id}}/atualiza_curso" class="btn btnxs btn-secondary" style="margin: 1.5rem; margin-left: 3rem;">Editar</a>
+          <a href="{{curso.id}}/remove_curso" class="btn btnxs btn-danger" style="margin: 1.5rem;margin-left: 3rem;" onclick="return confirm('Are ou sure about that ?')">Excluir</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock conteudo%}

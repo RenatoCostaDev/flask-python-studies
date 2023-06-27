@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block conteudo%}
+  <h2 style="text-align: center;">Atualizar curso</h2>
+  <hr>
+  <form action="{{url_for('atualiza_curso', id=curso.id)}}" method="POST" class="form-control">
+    <label for="nome" class="form-label">Nome</label>
+    <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome do curso" required value="{{curso.username}}">
+    <label for="descricao" class="form-label">Descricao</label>
+    <input type="text" name="descricao" id="descricao" class="form-control" placeholder="Descrição do curso" required value="{{curso.descricao}}">
+    <label for="ch" class="form-label">CH</label>
+    <input type="number" name="ch" id="ch" class="form-control" placeholder="Carga horária" required value="{{curso.ch}}">
+    <button class="btn btn-success" style="margin-top: 1.5rem;">Atualizar</button>
+  </form>
+{% endblock conteudo%}

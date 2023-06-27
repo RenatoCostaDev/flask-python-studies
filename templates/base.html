@@ -21,13 +21,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{url_for('principal')}}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{url_for('principal')}}">Lista de Frutas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('about')}}">Alunos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('covid')}}">Covid</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{url_for('about')}}">Sobre</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,6 +39,9 @@
               <li><a class="dropdown-item" href="{{url_for('covid_estado', estado='rj')}}">RJ</a></li>
               <li><a class="dropdown-item" href="{{url_for('covid_estado', estado='es')}}">ES</a></li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('lista_cursos')}}">Cursos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
